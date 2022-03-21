@@ -1,0 +1,5 @@
+build/
+node_modules/
+fp-info-cache
+sdkconfig.old
+nvs_partition.bin

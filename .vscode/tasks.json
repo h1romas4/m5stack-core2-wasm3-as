@@ -1,0 +1,22 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "idf.py build flash monitor",
+            "command": "idf.py",
+            "args": [
+                "build",
+                "flash",
+                "monitor"
+            ],
+        },
+        {
+            "type": "shell",
+            "label": "Flash partision (Wasm)",
+            "command": "(cd wasm && npm run asbuild) && python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x10000 resources/wasm resources/spiffs_wasm.bin && parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin && idf.py monitor"
+        }
+    ]
+}
