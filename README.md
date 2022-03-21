@@ -97,7 +97,7 @@ Restart M5Stack Core 2 (NTP synchronization is performed by pressing the virtual
 idf.py monitor
 ```
 
-## Build AssemblyScripot
+## Build AssemblyScript
 
 ```
 cd wasm
