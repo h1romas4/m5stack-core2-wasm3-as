@@ -121,12 +121,14 @@ python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x10000 resources/wasm resourc
 parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
-### Note
+## Note
 
 - Create SPIFFS parteation file
 
 ```
+# for TrueType font
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x100000 resources/font resources/spiffs_font.bin
+# for .wasm binary
 python ${IDF_PATH}/components/spiffs/spiffsgen.py 0x10000 resources/wasm resources/spiffs_wasm.bin
 ```
 
