@@ -94,6 +94,18 @@ set(SRCS
 
 idf_component_register(INCLUDE_DIRS ${INCLUDEDIRS} SRCS ${SRCS} REQUIRES arduino)
 
+target_compile_options(${COMPONENT_TARGET} PRIVATE
+    -DFONT_CACHE_ALLOC=MALLOC_CAP_SPIRAM
+    -O3
+    -g0
+    -s
+)
+
+set_source_files_properties(M5Core2/src/utility/M5Button.cpp
+    PROPERTIES COMPILE_FLAGS
+    -Wno-error=stringop-truncation
+)
+
 set_source_files_properties(M5Core2/src/Fonts/glcdfont.c
     PROPERTIES COMPILE_FLAGS
     -Wno-error=unused-const-variable
