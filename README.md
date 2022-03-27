@@ -50,6 +50,7 @@ git clone and build
 
 ```
 git clone --recursive https://github.com/h1romas4/m5stack-core2-wasm3-as
+cd m5stack-core2-wasm3-as
 # Flash partition table
 idf.py build flash
 ```
