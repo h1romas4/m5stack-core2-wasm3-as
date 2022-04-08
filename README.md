@@ -1,5 +1,7 @@
 # m5stack-core2-wasm3-as
 
+![](https://github.com/h1romas4/m5stack-core2-wasm3-as/workflows/Build/badge.svg)
+
 M5Stack Core2 With Wasm3/AssemblyScript Demo.
 
 TODO: Memory allocation needs to be improved so that PSRAM(slow) is not used.
