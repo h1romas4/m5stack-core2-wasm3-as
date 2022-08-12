@@ -36,6 +36,7 @@ set(SRCS
     M5Core2/src/RTC.cpp
     M5Core2/src/M5Touch.cpp
     M5Core2/src/AXP192.cpp
+    M5Core2/src/Speaker.cpp
     # FreeType
     M5EPD/src/font_render.c
     M5EPD/src/ffsupport.cpp
@@ -114,4 +115,14 @@ set_source_files_properties(M5Core2/src/Fonts/glcdfont.c
 set_source_files_properties(M5Core2/src/AXP192.cpp
     PROPERTIES COMPILE_FLAGS
     -Wno-error=maybe-uninitialized
+)
+
+set_source_files_properties(M5Core2/src/utility/In_eSPI.cpp
+    PROPERTIES COMPILE_FLAGS
+    -Wno-error=comment
+)
+
+set_source_files_properties(M5Core2/src/utility/Sprite.cpp
+    PROPERTIES COMPILE_FLAGS
+    -Wno-error=comment
 )
