@@ -1,14 +1,14 @@
 {
-  "name": "riscv-wasm",
+  "name": "xtensa-wasm",
   "version": "1.0.0",
   "description": "RISC-V wasm3 example",
   "devDependencies": {
-    "@babel/core": "^7.15.8",
-    "@babel/eslint-parser": "^7.15.8",
-    "@babel/plugin-transform-runtime": "^7.15.8",
-    "@babel/preset-env": "^7.15.8",
-    "parcel": "^2.3.2",
-    "@parcel/source-map": "^2.0.0",
+    "@babel/core": "^7.18.10",
+    "@babel/eslint-parser": "^7.18.9",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@babel/preset-env": "^7.18.10",
+    "parcel": "^2.7.0",
+    "@parcel/source-map": "^2.1.0",
     "assemblyscript": "^0.19.23"
   },
   "scripts": {
