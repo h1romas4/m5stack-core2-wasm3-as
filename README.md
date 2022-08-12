@@ -2,7 +2,7 @@
 
 ![](https://github.com/h1romas4/m5stack-core2-wasm3-as/workflows/Build/badge.svg)
 
-M5Stack Core2 With Wasm3/AssemblyScript Demo.
+M5Stack Core2(Xtensa) With Wasm3/AssemblyScript Demo.
 
 TODO: Memory allocation needs to be improved so that PSRAM(slow) is not used.
 
@@ -10,7 +10,9 @@ TODO: Memory allocation needs to be improved so that PSRAM(slow) is not used.
 
 See also: RISC-V version
 
-[m5stamp-c3dev](https://github.com/h1romas4/m5stamp-c3dev)
+> [m5stamp-c3dev](https://github.com/h1romas4/m5stamp-c3dev)
+>
+> This is a development board for the M5Stamp C3 (RISC-V/FreeRTOS).
 
 ## Build
 
