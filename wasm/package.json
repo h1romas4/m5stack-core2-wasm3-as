@@ -14,8 +14,8 @@
   "scripts": {
     "asbuild:web": "asc src/main.ts -o ./dist/app.wasm -t build/app.wat -b build/app.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
     "asbuild": "asc src/main.ts -o ../resources/wasm/app.wasm -t build/app.wat -b build/app.d.ts --runtime minimal --exportRuntime --lowMemoryLimit 32767 --use Math=NativeMathf -O3 --optimize",
-    "start": "parcel web/index.html",
-    "deploy": "parcel build --public-url '.' web/index.html"
+    "start": "npm run asbuild:web && parcel web/index.html",
+    "deploy": "npm run asbuild:web && parcel build --public-url '.' web/index.html"
   },
   "author": "h1romas4",
   "license": "MIT"
