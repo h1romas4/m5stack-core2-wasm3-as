@@ -145,11 +145,11 @@ Thanks for all the open source.
 |Name|Version|License|
 |-|-|--|
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4.2`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.4`|LGPL-2.1 License|
-|[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.4`|MIT License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.5`|LGPL-2.1 License|
+|[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.5`|MIT License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
-|[Wasm3](https://github.com/wasm3/wasm3)|master(`dc9fa49`)|MIT License|
-|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.20.18`|Apache-2.0 License|
+|[Wasm3](https://github.com/wasm3/wasm3)|master(`fa18e9ec`)|MIT License|
+|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.24.1`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
