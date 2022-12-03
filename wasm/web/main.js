@@ -137,7 +137,6 @@ function decodeUTF8(wasmPtr) {
 (async function() {
     await loadWasm();
     wasmExports.clock(160, 120, 120);
-    wasmExports.init();
     setInterval(() => {
         wasmExports.tick();
         wasmExports.__collect() // clean up all garbage
