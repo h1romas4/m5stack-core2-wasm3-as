@@ -51,28 +51,39 @@ gcc version 8.4.0 (crosstool-NG esp-2021r2-patch3)
 
 ### Build and Execute
 
-git clone and build
+1. git clone and build
 
 ```
 git clone --recursive https://github.com/h1romas4/m5stack-core2-wasm3-as
 cd m5stack-core2-wasm3-as
-# Flash partition table
-idf.py build flash
+idf.py build
 ```
 
-Write TypeType font to SPIFFS
+2. Write Partition table
+
+```
+idf.py partition-table-flash
+```
+
+3. Write TypeType font to SPIFFS
 
 ```
 parttool.py write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
 ```
 
-Write WebAssembly(.wasm) to SPIFFS ([AssemblyScript Analog Clock](https://h1romas4.github.io/m5stamp-c3dev/asclock/))
+4. Write WebAssembly(.wasm) to SPIFFS ([AssemblyScript Analog Clock](https://h1romas4.github.io/m5stamp-c3dev/asclock/))
 
 ```
 parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
-Setup WiFi for NTP (Optional)
+5. Restart M5Stack Core 2 (NTP synchronization is performed by pressing the virtual button on the screen after the startup logo)
+
+```
+idf.py flash monitor
+```
+
+### Setup WiFi (Optional)
 
 1. Change WiFi Setting
 
@@ -97,7 +108,9 @@ python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_ge
 esptool.py write_flash 0x9000 nvs_partition.bin
 ```
 
-Restart M5Stack Core 2 (NTP synchronization is performed by pressing the virtual button on the screen after the startup logo)
+4. Run
+
+NTP synchronization is performed by pressing the "Center button" after the startup logo.
 
 ```
 idf.py monitor
