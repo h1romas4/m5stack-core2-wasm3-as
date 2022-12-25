@@ -18,7 +18,7 @@ See also: RISC-V version
 
 ### Require
 
-- [Setup ESF-IDF v4.4.2](https://docs.espressif.com/projects/esp-idf/en/v4.4.2/esp32/get-started/index.html#installation-step-by-step)
+- [Setup ESF-IDF v4.4.3](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32/get-started/index.html#installation-step-by-step)
 
 get_idf
 
@@ -46,7 +46,7 @@ lto-wrapper
 Target: xtensa-esp32-elf
 ... snip ...
 Thread model: posix
-gcc version 8.4.0 (crosstool-NG esp-2021r2-patch3)
+gcc version 8.4.0 (crosstool-NG esp-2021r2-patch5)
 ```
 
 ### Build and Execute
@@ -157,8 +157,8 @@ Thanks for all the open source.
 
 |Name|Version|License|
 |-|-|--|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4.2`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.5`|LGPL-2.1 License|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4.3`|BSD License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.6`|LGPL-2.1 License|
 |[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.5`|MIT License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`fa18e9ec`)|MIT License|
