@@ -12,19 +12,32 @@ jobs:
     - uses: actions/checkout@v1
       with:
         submodules: recursive
-    - name: esp-idf Toolchain Setup
+
+    - uses: actions/cache@v3
+      id: cache-toolchaine
+      with:
+        path: |
+          ~/esp
+          ~/.espressif/
+        key: ${{ runner.os }}-espidf-and-compiler-v443
+
+    - name: esp-idf Dependencies Setup
       run: |
         sudo apt-get install git wget flex bison gperf python3 python3-pip python3-setuptools cmake ninja-build ccache libffi-dev libssl-dev dfu-util libusb-1.0-0
+
+    - name: esp-idf Toolchain Setup
+      if: steps.cache-toolchaine.outputs.cache-hit != 'true'
+      run: |
         mkdir -p ~/esp
         cd ~/esp
         git clone -b v4.4.3 --recursive https://github.com/espressif/esp-idf.git
         cd ~/esp/esp-idf
         ./install.sh esp32
-        . ~/esp/esp-idf/export.sh
-        pip3 install -r $IDF_PATH/requirements.txt
+
     - name: Build
       run: |
         . ~/esp/esp-idf/export.sh
+        pip3 install -r $IDF_PATH/requirements.txt
         idf.py build
         cd wasm
         npm install
