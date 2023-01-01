@@ -77,7 +77,7 @@ parttool.py write_partition --partition-name=font --partition-subtype=spiffs --i
 parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
 ```
 
-5. Restart M5Stack Core 2 (NTP synchronization is performed by pressing the virtual button on the screen after the startup logo)
+5. Restart M5Stack Core 2
 
 ```
 idf.py flash monitor
