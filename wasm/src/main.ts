@@ -1,6 +1,6 @@
 import * as c3dev from "./c3dev";
 
-let analogClock: AnalogClock;
+let analogClock: AnalogClock | null;
 
 const DEG_TO_RAD: f32         = Math.PI / 180;
 const HAND_LENGTH_HOUR: f32   = 0.55;
@@ -137,6 +137,8 @@ class AnalogClock {
         const cy = this.cy;
         const cr = <f32>this.cr;
 
+        c3dev.start_write();
+
         let sraito: f32 = 0;
         for(let angle: f32 = start; angle > stop; angle -= 0.1) {
             const rad = angle * DEG_TO_RAD;
@@ -149,9 +151,11 @@ class AnalogClock {
             const ty = cy + <i32>(sin * (cr + 8));
 
             const color = sraito > ratio ? bc : fc;
-            line(sx, sy, tx, ty, color);
+            line(sx, sy, tx, ty, color, false);
             sraito += step;
         }
+
+        c3dev.end_write();
     }
 
     calcHands(date: Date): Hands {
@@ -169,14 +173,16 @@ export function clock(x: u32, y: u32, r: u32): void {
 
 export function tick(): void {
     if(analogClock != null) {
-        analogClock.tick();
+        analogClock!.tick();
     }
 }
 
-function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
+function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR, tranctl: bool = true): void {
     let xx: u32 = r;
     let yy: u32 = 0;
     let err = 0;
+
+    if(tranctl) c3dev.start_write();
 
     while(xx >= yy) {
         c3dev.draw_pixel(x + xx, y + yy, color);
@@ -195,9 +201,11 @@ function circle(x: u32, y: u32, r: u32, color: c3dev.COLOR): void {
             err -= 2 * xx + 1;
         }
     }
+
+    if(tranctl) c3dev.end_write();
 }
 
-function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR): void {
+function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR, tranctl: bool = true): void {
     let dx = abs<i32>(x1 - x0);
     let dy = abs<i32>(y1 - y0);
     let sx = x0 < x1 ? 1: -1;
@@ -206,6 +214,8 @@ function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR): void {
     let x: i32 = x0;
     let y: i32 = y0;
     let err = dx - dy;
+
+    if(tranctl) c3dev.start_write();
 
     while(true) {
         c3dev.draw_pixel(x, y, color);
@@ -222,4 +232,6 @@ function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR): void {
             y += sy;
         }
     }
+
+    if(tranctl) c3dev.end_write();
 }

@@ -68,9 +68,15 @@ function createImports() {
         }
     };
     imports['c3dev'] = {
+        'start_write': () => {
+            // nothing to do
+        },
         'draw_pixel': (x, y, color) => {
             canvasContext.fillStyle = convertRGB565toStyle(color);
             canvasContext.fillRect(x, y, 1, 1);
+        },
+        'end_write': () => {
+            // nothing to do
         },
         'draw_string': (x, y, color, string) => {
             canvasContext.fillStyle = convertRGB565toStyle(color);

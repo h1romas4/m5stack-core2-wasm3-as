@@ -160,7 +160,7 @@ Thanks for all the open source.
 |[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.5`|MIT License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`fa18e9ec`)|MIT License|
-|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.24.1`|Apache-2.0 License|
+|[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.25.2`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
 
 ## License
