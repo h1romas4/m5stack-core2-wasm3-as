@@ -4,8 +4,6 @@
 
 M5Stack Core2(Xtensa) With Wasm3/AssemblyScript Demo.
 
-TODO: Memory allocation needs to be improved so that PSRAM(slow) is not used.
-
 ![Main Board](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-01.jpg)
 
 See also: RISC-V version

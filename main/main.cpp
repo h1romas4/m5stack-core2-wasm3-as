@@ -55,9 +55,13 @@ void setup(void)
 {
     M5.begin();
 
+    // Test - Load FreeType font to PSRAM and init
+    load_ttf_spiffs_psram();
+    // load_ttf_spiffs();
+
     // Test FreeType
-    init_freetype();
     font_render = create_freetype_render(/* font size */ 40, /* font cache */ 24);
+
     draw_freetype_string("M5Stack Core2", 10, 10 + 50, M5.Lcd.color565(0, 0, 255), &font_render);
     draw_freetype_string("Development", 10, 10 + 50 * 2, M5.Lcd.color565(255, 255, 255), &font_render);
     draw_freetype_string("Board", 10, 10 + 50 * 3, M5.Lcd.color565(255, 255, 255), &font_render);

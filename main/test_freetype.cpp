@@ -20,9 +20,9 @@ font_face_t font_face;
 const uint8_t alphamap[16] = {0, 17, 34, 51, 68, 85, 102, 119, 136, 153, 170, 187, 204, 221, 238, 255};
 
 /**
- * Utility drawFreetypeBitmap
+ * Utility draw_freetype_bitmap
  */
-void drawFreetypeBitmap(int32_t cx, int32_t cy, uint16_t bw, uint16_t bh, uint16_t fg, uint8_t *bitmap)
+void draw_freetype_bitmap(int32_t cx, int32_t cy, uint16_t bw, uint16_t bh, uint16_t fg, uint8_t *bitmap)
 {
     uint32_t pos = 0;
     uint16_t bg = 0;
@@ -55,7 +55,7 @@ void draw_freetype_string(const char *string, int32_t poX, int32_t poY, uint16_t
         if (font_render_glyph(render, uniCode) != ESP_OK) {
             ESP_LOGE(TAG, "Font render faild.");
         }
-        drawFreetypeBitmap(poX + render->bitmap_left,
+        draw_freetype_bitmap(poX + render->bitmap_left,
             base_y - render->bitmap_top,
             render->bitmap_width,
             render->bitmap_height,
@@ -67,7 +67,33 @@ void draw_freetype_string(const char *string, int32_t poX, int32_t poY, uint16_t
     }
 }
 
-void init_freetype(void)
+/**
+ * load_ttf_spiffs_psram (fast)
+ */
+void load_ttf_spiffs_psram(void)
+{
+    // FreeType initialize
+    SPIFFS_FONT.begin(false, "/font", 4, "font");
+
+    // Read fonts from SPIFFS and extract them in PSRAM. (fast)
+    File fp = SPIFFS_FONT.open("/GENSHINM.TTF", "r");
+    size_t font_size = fp.size();
+    uint8_t *font_data = (uint8_t *)heap_caps_malloc(font_size, MALLOC_CAP_SPIRAM);
+    fp.read(font_data, font_size);
+    if (font_face_init(&font_face, font_data, font_size) != ESP_OK) {
+        ESP_LOGE(TAG, "Font load faild.");
+    }
+    fp.close();
+
+    SPIFFS_FONT.end();
+
+    ESP_LOGI(TAG, "Minimum free heap size: %d bytes", esp_get_minimum_free_heap_size());
+}
+
+/**
+ * load_ttf_spiffs (slow)
+ */
+void load_ttf_spiffs(void)
 {
     // FreeType initialize
     SPIFFS_FONT.begin(false, "/font", 4, "font");
