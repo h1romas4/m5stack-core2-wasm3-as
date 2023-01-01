@@ -12,6 +12,10 @@ See also: RISC-V version
 >
 > This is a development board for the M5Stamp C3 (RISC-V/FreeRTOS).
 
+## Demo
+
+[📼 Movie](https://twitter.com/h1romas4/status/1609484777186553861)
+
 ## Build
 
 ### Require
