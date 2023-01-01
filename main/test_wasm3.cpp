@@ -294,8 +294,8 @@ esp_err_t init_wasm(void)
     size_t wasm_size = wasm_file.size();
 
     ESP_LOGI(TAG, "app.wasm: %d", wasm_size);
-    // Read .wasm
-    uint8_t *wasm_binary = (uint8_t *)malloc(sizeof(uint8_t) * wasm_size);
+    // Read .wasm to Internal RAM (or MALLOC_CAP_SPIRAM - slow)
+    uint8_t *wasm_binary = (uint8_t *)heap_caps_malloc(sizeof(uint8_t) * wasm_size, MALLOC_CAP_INTERNAL);
     if(wasm_binary == nullptr) {
         ESP_LOGE(TAG, "Memory alloc error");
         return ESP_FAIL;
