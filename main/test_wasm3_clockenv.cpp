@@ -286,14 +286,14 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     return ESP_OK;
 }
 
-esp_err_t init_wasm(void)
+esp_err_t init_wasm_clockenv(void)
 {
     SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
 
-    File wasm_file = SPIFFS_WASM.open("/app.wasm", "rb");
+    File wasm_file = SPIFFS_WASM.open("/clockenv.wasm", "rb");
     size_t wasm_size = wasm_file.size();
 
-    ESP_LOGI(TAG, "app.wasm: %d", wasm_size);
+    ESP_LOGI(TAG, "clockenv.wasm: %d", wasm_size);
     // Read .wasm to Internal RAM (or MALLOC_CAP_SPIRAM - slow)
     uint8_t *wasm_binary = (uint8_t *)heap_caps_malloc(sizeof(uint8_t) * wasm_size, MALLOC_CAP_INTERNAL);
     if(wasm_binary == nullptr) {
@@ -317,7 +317,7 @@ esp_err_t init_wasm(void)
     return load_wasm(wasm_binary, wasm_size);
 }
 
-esp_err_t tick_wasm(void)
+esp_err_t tick_wasm_clockenv(void)
 {
     M3Result result = m3Err_none;
 

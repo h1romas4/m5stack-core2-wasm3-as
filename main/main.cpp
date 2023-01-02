@@ -3,7 +3,7 @@
 #include "WiFi.h"
 
 #include "test_freetype.h"
-#include "test_wasm3.h"
+#include "test_wasm3_clockenv.h"
 
 static const char *TAG = "main.cpp";
 
@@ -78,13 +78,13 @@ void setup(void)
     }
 
     // Test WebAssembly
-    if(init_wasm() == ESP_OK) enable_wasm = true;
+    if(init_wasm_clockenv() == ESP_OK) enable_wasm = true;
 }
 
 void loop(void)
 {
     M5.update();
     // Test WebAssembly
-    if(enable_wasm) tick_wasm();
+    if(enable_wasm) tick_wasm_clockenv();
     delay(500);
 }

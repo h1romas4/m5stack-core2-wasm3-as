@@ -43,7 +43,7 @@ let wasmExports;
  * Load WebAssembly
  */
 async function loadWasm() {
-    const response = await fetch(new URL('../dist/app.wasm', import.meta.url));
+    const response = await fetch(new URL('../dist/clockenv.wasm', import.meta.url));
     const responseArrayBuffer = new Uint8Array(await response.arrayBuffer());
     const wasm_bytes = new Uint8Array(responseArrayBuffer).buffer;
     let module = await WebAssembly.compile(wasm_bytes);
