@@ -129,6 +129,19 @@ m3ApiRawFunction(c3dev_draw_pixel)
     m3ApiSuccess();
 }
 
+m3ApiRawFunction(c3dev_draw_line)
+{
+    m3ApiGetArg(int32_t, x0)
+    m3ApiGetArg(int32_t, y0)
+    m3ApiGetArg(int32_t, x1)
+    m3ApiGetArg(int32_t, y1)
+    m3ApiGetArg(int32_t, color)
+
+    M5.Lcd.drawLine(x0, y0, x1, y1, color);
+
+    m3ApiSuccess();
+}
+
 m3ApiRawFunction(c3dev_fill_rect)
 {
     m3ApiGetArg(int32_t, x0)
@@ -180,6 +193,7 @@ M3Result link_c3dev(IM3Runtime runtime) {
     m3_LinkRawFunction(module, "c3dev", "delay", "v(i)",  &c3dev_delay);
     m3_LinkRawFunction(module, "c3dev", "start_write", "v()",  &c3dev_start_write);
     m3_LinkRawFunction(module, "c3dev", "draw_pixel", "v(iii)",  &c3dev_draw_pixel);
+    m3_LinkRawFunction(module, "c3dev", "draw_line", "v(iiiii)",  &c3dev_draw_line);
     m3_LinkRawFunction(module, "c3dev", "fill_rect", "v(iiiii)",  &c3dev_fill_rect);
     m3_LinkRawFunction(module, "c3dev", "end_write", "v()",  &c3dev_end_write);
     m3_LinkRawFunction(module, "c3dev", "draw_string", "v(iii*)",  &c3dev_draw_string);

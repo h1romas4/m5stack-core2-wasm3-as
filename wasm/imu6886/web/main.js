@@ -75,6 +75,14 @@ function createImports() {
             canvasContext.fillStyle = convertRGB565toStyle(color);
             canvasContext.fillRect(x, y, 1, 1);
         },
+        'draw_line': (x0, y0, x1, y1, color) => {
+            canvasContext.strokeStyle = convertRGB565toStyle(color);
+            canvasContext.lineWidth = 1;
+            canvasContext.beginPath();
+            canvasContext.moveTo(x0, y0);
+            canvasContext.lineTo(x1 + 1, y1 + 1);
+            canvasContext.stroke();
+        },
         'fill_rect': (x0, y0, x1, y1, color) => {
             canvasContext.fillStyle = convertRGB565toStyle(color);
             canvasContext.fillRect(x0, y0, x1, y1);

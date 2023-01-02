@@ -25,6 +25,7 @@ class Imu {
     private center_x: f32 = 0;
     private center_y: f32 = 0;
     private angle: f32 = 0;
+    private prev_proj_2d_points: u32[][] = [];
 
     constructor(
         private width: u32,
@@ -36,6 +37,9 @@ class Imu {
     init(): void {
         this.center_x = this.width as f32 / 2.0;
         this.center_y = this.height as f32 / 2.0;
+        for(let i = 0; i < CUBE_LENGTH; i++) {
+            this.prev_proj_2d_points[i] = [0, 0];
+        }
     }
 
     tick(): void {
@@ -80,25 +84,37 @@ class Imu {
         }
 
         // Draw
+        // c3dev.fill_rect(0, 0, this.width, this.height, c3dev.COLOR.BLACK);
+
         c3dev.start_write();
-        c3dev.fill_rect(0, 0, this.width, this.height, c3dev.COLOR.BLACK);
+        // clear prev lines
         for(let i = 0; i < CUBE_LENGTH / 2; i++) {
-            this.connect(i, (i + 1) % 4, proj_2d_points);
-            this.connect(i + 4, (i + 1) % 4 + 4, proj_2d_points);
-            this.connect(i, i + 4, proj_2d_points);
+            this.connect(i, (i + 1) % 4, this.prev_proj_2d_points, c3dev.COLOR.BLACK);
+            this.connect(i + 4, (i + 1) % 4 + 4, this.prev_proj_2d_points, c3dev.COLOR.BLACK);
+            this.connect(i, i + 4, this.prev_proj_2d_points, c3dev.COLOR.BLACK);
         }
+        // draw lines
+        for(let i = 0; i < CUBE_LENGTH / 2; i++) {
+            this.connect(i, (i + 1) % 4, proj_2d_points, c3dev.COLOR.BLUE);
+            this.connect(i + 4, (i + 1) % 4 + 4, proj_2d_points, c3dev.COLOR.BLUE);
+            this.connect(i, i + 4, proj_2d_points, c3dev.COLOR.BLUE);
+        }
+        // draw points and save prev
         for(let i = 0; i < CUBE_LENGTH; i++) {
-            c3dev.draw_pixel(proj_2d_points[i][0], proj_2d_points[i][1], c3dev.COLOR.RED);
+            const x = proj_2d_points[i][0];
+            const y = proj_2d_points[i][1]
+            c3dev.draw_pixel(x, y, c3dev.COLOR.RED);
+            this.prev_proj_2d_points[i] = [x, y];
         }
         c3dev.end_write();
 
         this.angle += 0.01;
     }
 
-    connect(i: u32, j: u32, k: u32[][]): void {
+    connect(i: u32, j: u32, k: u32[][], color: c3dev.COLOR): void {
         const a = k[i];
         const b = k[j];
-        line(a[0], a[1], b[0], b[1], c3dev.COLOR.BLUE);
+        c3dev.draw_line(a[0], a[1], b[0], b[1], color);
     }
 }
 
@@ -124,35 +140,4 @@ function matrix_multiple(a: f32[][], b: f32[]): f32[] {
     }
 
     return result;
-}
-
-function line(x0: u32, y0: u32, x1: u32, y1: u32, color: c3dev.COLOR, tranctl: bool = true): void {
-    let dx = abs<i32>(x1 - x0);
-    let dy = abs<i32>(y1 - y0);
-    let sx = x0 < x1 ? 1: -1;
-    let sy = y0 < y1 ? 1: -1;
-
-    let x: i32 = x0;
-    let y: i32 = y0;
-    let err = dx - dy;
-
-    if(tranctl) c3dev.start_write();
-
-    while(true) {
-        c3dev.draw_pixel(x, y, color);
-        if(x == x1 && y == y1) {
-            break;
-        }
-        let e2 = 2 * err;
-        if(e2 > -dy) {
-            err -= dy;
-            x += sx;
-        }
-        if(e2 < dx) {
-            err += dx;
-            y += sy;
-        }
-    }
-
-    if(tranctl) c3dev.end_write();
 }
