@@ -5,6 +5,7 @@ set(INCLUDEDIRS
 set(SRCS
     main.cpp
     test_wasm3_clockenv.cpp
+    test_wasm3_imu6886.cpp
     test_freetype.cpp
 )
 
