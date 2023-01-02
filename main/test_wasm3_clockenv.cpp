@@ -11,7 +11,7 @@
 
 #include "test_freetype.h"
 
-static const char *TAG = "test_wasm3.cpp";
+static const char *TAG = "test_wasm3_clockenv.cpp";
 
 /**
  * Wasm3 member
