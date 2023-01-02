@@ -6,8 +6,6 @@ M5Stack Core2(Xtensa) With Wasm3/AssemblyScript Demo.
 
 ![Wasm1](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-01.jpg)
 
-![Wasm2](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-04.jpg)
-
 See also: RISC-V version
 
 > [m5stamp-c3dev](https://github.com/h1romas4/m5stamp-c3dev)
@@ -100,6 +98,8 @@ idf.py menuconfig
 ```
 idf.py build flash monitor
 ```
+
+![Wasm2](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-04.jpg)
 
 ### Setup WiFi (Optional)
 
