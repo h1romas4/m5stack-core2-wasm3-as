@@ -1,0 +1,10 @@
+menu "WebAssembly Apps"
+    choice
+        prompt "Select WebAssembly Apps"
+            default WASM_CLOCK
+        config WASM_CLOCK
+            bool "Clock"
+        config WASM_IMU6886
+            bool "AXIS IMU-6886"
+    endchoice
+endmenu

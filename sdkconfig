@@ -133,6 +133,13 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# WebAssembly Apps
+#
+CONFIG_WASM_CLOCK=y
+# CONFIG_WASM_IMU6886 is not set
+# end of WebAssembly Apps
+
+#
 # Arduino Configuration
 #
 CONFIG_ARDUINO_VARIANT="esp32"
