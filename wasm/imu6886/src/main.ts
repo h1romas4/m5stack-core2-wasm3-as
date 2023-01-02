@@ -95,9 +95,9 @@ class Imu {
         }
         // draw lines
         for(let i = 0; i < CUBE_LENGTH / 2; i++) {
-            this.connect(i, (i + 1) % 4, proj_2d_points, c3dev.COLOR.BLUE);
-            this.connect(i + 4, (i + 1) % 4 + 4, proj_2d_points, c3dev.COLOR.BLUE);
-            this.connect(i, i + 4, proj_2d_points, c3dev.COLOR.BLUE);
+            this.connect(i, (i + 1) % 4, proj_2d_points, c3dev.COLOR.GREEN);
+            this.connect(i + 4, (i + 1) % 4 + 4, proj_2d_points, c3dev.COLOR.GREEN);
+            this.connect(i, i + 4, proj_2d_points, c3dev.COLOR.GREEN);
         }
         // draw points and save prev
         for(let i = 0; i < CUBE_LENGTH; i++) {
@@ -108,7 +108,7 @@ class Imu {
         }
         c3dev.end_write();
 
-        this.angle += 0.01;
+        this.angle += 0.04;
     }
 
     connect(i: u32, j: u32, k: u32[][], color: c3dev.COLOR): void {
