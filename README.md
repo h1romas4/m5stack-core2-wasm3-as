@@ -4,7 +4,9 @@
 
 M5Stack Core2(Xtensa) With Wasm3/AssemblyScript Demo.
 
-![Main Board](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-01.jpg)
+![Wasm1](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-01.jpg)
+
+![Wasm2](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-04.jpg)
 
 See also: RISC-V version
 
@@ -85,6 +87,20 @@ parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --i
 idf.py flash monitor
 ```
 
+### Switch WebAssembly Apps
+
+```
+idf.py menuconfig
+```
+
+`WebAssembly Apps - Select WebAssembly Apps`
+
+![menuconfig](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-03.png)
+
+```
+idf.py build flash monitor
+```
+
 ### Setup WiFi (Optional)
 
 1. Change WiFi Setting
@@ -121,7 +137,7 @@ idf.py monitor
 ## Build AssemblyScript
 
 ```
-cd wasm/clockenv
+cd wasm/clockenv # or wasm/imu6886
 npm install
 ```
 
