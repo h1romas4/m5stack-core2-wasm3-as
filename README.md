@@ -12,11 +12,11 @@ See also: RISC-V version
 >
 > This is a development board for the M5Stamp C3 (RISC-V/FreeRTOS).
 
-## Demo
+## Video
 
-[📼 Movie - Clock](https://twitter.com/h1romas4/status/1609484777186553861)
-
-[📼 Movie - 3D Cube](https://twitter.com/h1romas4/status/1609882456781623296)
+- [📼 Demo Clock](https://twitter.com/h1romas4/status/1609484777186553861)
+- [📼 Demo 3D Cube1](https://twitter.com/h1romas4/status/1609882456781623296)
+- [📼 Demo 3D Cube2](https://twitter.com/h1romas4/status/1610228824607985664)
 
 ## Build
 
