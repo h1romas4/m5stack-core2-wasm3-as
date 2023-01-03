@@ -103,6 +103,8 @@ idf.py build flash monitor
 
 ![Wasm2](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-04.jpg)
 
+NOTE: Connection to IMU sensor is not yet implemented.
+
 ### Setup WiFi (Optional)
 
 1. Change WiFi Setting
