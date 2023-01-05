@@ -102,7 +102,13 @@ void loop(void)
     #endif
 
     #ifdef CONFIG_WASM_IMU6886
-    if(enable_wasm) tick_wasm_imu6886();
+    if(enable_wasm) {
+        // uint32_t time = millis();
+        tick_wasm_imu6886();
+        // ESP_LOGI(TAG, "time: %d", (uint32_t)(millis() - time));
+        // When draw to LCD is suppressed. (calculations only)
+        //     I (7264) main.cpp: time: 42
+    }
     delay(1);
     #endif
 }
