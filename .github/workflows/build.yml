@@ -19,7 +19,7 @@ jobs:
         path: |
           ~/esp
           ~/.espressif/
-        key: ${{ runner.os }}-espidf-and-compiler-v443
+        key: ${{ runner.os }}-espidf-and-compiler-v443-u2204
 
     - name: esp-idf Dependencies Setup
       run: |
