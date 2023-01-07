@@ -141,7 +141,7 @@ idf.py monitor
 ## Build AssemblyScript
 
 ```
-cd wasm/clockenv # or wasm/imu6886
+cd wasm/clockenv # or wasm/imu6886 or wasm/gpsgsv
 npm install
 ```
 
@@ -183,6 +183,7 @@ Thanks for all the open source.
 |[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.6`|LGPL-2.1 License|
 |[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.5`|MIT License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
+|[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|
 |[AsselblyScript](https://github.com/AssemblyScript/assemblyscript)|`0.25.2`|Apache-2.0 License|
 |[源真ゴシック](http://jikasei.me/font/genshin/)|-|SIL Open Font License 1.1|
