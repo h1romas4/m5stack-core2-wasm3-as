@@ -10,6 +10,10 @@
 #ifdef CONFIG_WASM_IMU6886
 #include "test_wasm3_imu6886.h"
 #endif
+#ifdef CONFIG_WASM_UNITGPS
+#include "test_uart_unitgps.h"
+#include "test_wasm3_gpsgsv.h"
+#endif
 
 static const char *TAG = "main.cpp";
 
@@ -83,6 +87,11 @@ void setup(void)
         delay(10);
     }
 
+    // Test Sensor
+    #ifdef CONFIG_WASM_UNITGPS
+    init_uart_unitgps();
+    #endif
+
     // Test WebAssembly
     #ifdef CONFIG_WASM_CLOCK
     if(init_wasm_clockenv() == ESP_OK) enable_wasm = true;
@@ -90,17 +99,20 @@ void setup(void)
     #ifdef CONFIG_WASM_IMU6886
     if(init_wasm_imu6886() == ESP_OK) enable_wasm = true;
     #endif
+    #ifdef CONFIG_WASM_UNITGPS
+    if(init_wasm_gpsgsv() == ESP_OK) enable_wasm = true;
+    #endif
 }
 
 void loop(void)
 {
     M5.update();
+
     // Test WebAssembly
     #ifdef CONFIG_WASM_CLOCK
     if(enable_wasm) tick_wasm_clockenv();
     delay(500);
     #endif
-
     #ifdef CONFIG_WASM_IMU6886
     if(enable_wasm) {
         // uint32_t time = millis();
@@ -110,5 +122,9 @@ void loop(void)
         //     I (7264) main.cpp: time: 42
     }
     delay(1);
+    #endif
+    #ifdef CONFIG_WASM_UNITGPS
+    if(enable_wasm) tick_wasm_gpsgsv(true);
+    delay(500);
     #endif
 }

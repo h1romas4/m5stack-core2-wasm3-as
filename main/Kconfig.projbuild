@@ -5,6 +5,8 @@ menu "WebAssembly Apps"
         config WASM_CLOCK
             bool "Clock"
         config WASM_IMU6886
-            bool "AXIS IMU-6886"
+            bool "3D Cube Demo (not yet impliments AXIS IMU-6886)"
+        config WASM_UNITGPS
+            bool "UNIT GPS"
     endchoice
 endmenu
