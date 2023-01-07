@@ -10,3 +10,6 @@
 [submodule "components/wasm/wasm3"]
 	path = components/wasm/wasm3
 	url = https://github.com/wasm3/wasm3.git
+[submodule "components/lwgps/lwgps"]
+	path = components/lwgps/lwgps
+	url = https://github.com/MaJerle/lwgps
