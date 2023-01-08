@@ -19,7 +19,7 @@ static const char *TAG = "test_wasm3_clockenv.cpp";
 IM3Environment wasm3_env;
 IM3Runtime wasm3_runtime;
 IM3Module wasm3_module;
-IM3Function wasm3_func_tick;
+IM3Function wasm3_func_rotate;
 IM3Function wasm3_func_collect;
 
 #define WASM3_STACK_SIZE 16384
@@ -247,7 +247,7 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     }
 
     // Get tick function
-    result = m3_FindFunction(&wasm3_func_tick, wasm3_runtime, "tick");
+    result = m3_FindFunction(&wasm3_func_rotate, wasm3_runtime, "tick");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
@@ -294,7 +294,7 @@ esp_err_t tick_wasm_clockenv(void)
 {
     M3Result result = m3Err_none;
 
-    result = m3_Call(wasm3_func_tick, 0, nullptr);
+    result = m3_Call(wasm3_func_rotate, 0, nullptr);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
