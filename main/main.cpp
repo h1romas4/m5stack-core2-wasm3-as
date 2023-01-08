@@ -11,6 +11,7 @@
 #include "test_wasm3_imu6886.h"
 #endif
 #ifdef CONFIG_WASM_3DCUBE_IMU6886
+#include "test_i2c_imu6866.h"
 #include "test_wasm3_imu6886.h"
 #endif
 #ifdef CONFIG_WASM_UNITGPS
@@ -94,6 +95,9 @@ void setup(void)
     #ifdef CONFIG_WASM_UNITGPS
     init_uart_unitgps();
     #endif
+    #ifdef CONFIG_WASM_3DCUBE_IMU6886
+    init_i2c_imu6886();
+    #endif
 
     // Test WebAssembly
     #ifdef CONFIG_WASM_CLOCK
@@ -130,7 +134,10 @@ void loop(void)
     delay(1);
     #endif
     #ifdef CONFIG_WASM_3DCUBE_IMU6886
-    if(enable_wasm) tick_wasm_3dcube_imu6866();
+    if(enable_wasm) {
+        tick_i2c_imu6886();
+        tick_wasm_3dcube_imu6866();
+    }
     delay(1);
     #endif
     #ifdef CONFIG_WASM_UNITGPS

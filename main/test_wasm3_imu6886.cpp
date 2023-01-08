@@ -9,6 +9,7 @@
 #include "m3_env.h"
 #include "m3_api_libc.h"
 
+#include "test_i2c_imu6866.h"
 #include "test_freetype.h"
 
 static const char *TAG = "test_wasm3_imu6886.cpp";
@@ -313,11 +314,10 @@ esp_err_t tick_wasm_3dcube_imu6866(void)
 {
     M3Result result = m3Err_none;
 
-    float_t roll = 0;
-    float_t pitch = 0;
-    float_t yaw = 0;
+    imu6886_t imu6886;
+    get_i2c_imu6886(&imu6886);
 
-    float_t *argv0[4] = { &roll, &pitch, &yaw };
+    float_t *argv0[4] = { &imu6886.roll, &imu6886.pitch, &imu6886.yaw };
     result = m3_Call(wasm3_func_angle, 3, (const void**)argv0);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
