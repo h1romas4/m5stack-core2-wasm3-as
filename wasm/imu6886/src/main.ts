@@ -70,20 +70,23 @@ class Imu {
     }
 
     angle(roll: f32, pitch: f32, yaw: f32): void {
-        const angle: f32 = roll; // TODO:
+        const cos_x: f32 = Mathf.cos(roll * DEG_TO_RAD);
+        const sin_x: f32 = Mathf.sin(roll * DEG_TO_RAD);
+        const cos_y: f32 = Mathf.cos(pitch * DEG_TO_RAD);
+        const sin_y: f32 = Mathf.sin(pitch * DEG_TO_RAD);
 
-        const cos: f32 = Mathf.cos(angle);
-        const sin: f32 = Mathf.sin(angle);
+        const cos: f32 = Mathf.cos(0);
+        const sin: f32 = Mathf.sin(0);
 
         const rot_x: f32[][] = [
-            [    1,    0,    0],
-            [    0,  cos, -sin],
-            [    0,  sin,  cos]
+            [    1,    0  ,      0],
+            [    0,  cos_x, -sin_x],
+            [    0,  sin_x,  cos_x]
         ];
         const rot_y: f32[][] = [
-            [  cos,    0,  -sin],
-            [    0,    1,     0],
-            [  sin,    0,   cos]
+            [  cos_y,    0, -sin_y],
+            [    0,      1,      0],
+            [  sin_y,    0,  cos_y]
         ];
         const rot_z: f32[][] = [
             [  cos, -sin,     0],
