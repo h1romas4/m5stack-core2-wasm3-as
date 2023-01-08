@@ -7,7 +7,11 @@
 #ifdef CONFIG_WASM_CLOCK
 #include "test_wasm3_clockenv.h"
 #endif
-#ifdef CONFIG_WASM_IMU6886
+#ifdef CONFIG_WASM_3DCUBE
+#include "test_wasm3_imu6886.h"
+#endif
+#ifdef CONFIG_WASM_3DCUBE_IMU6886
+#include "test_i2c_imu6866.h"
 #include "test_wasm3_imu6886.h"
 #endif
 #ifdef CONFIG_WASM_UNITGPS
@@ -91,13 +95,19 @@ void setup(void)
     #ifdef CONFIG_WASM_UNITGPS
     init_uart_unitgps();
     #endif
+    #ifdef CONFIG_WASM_3DCUBE_IMU6886
+    init_i2c_imu6886();
+    #endif
 
     // Test WebAssembly
     #ifdef CONFIG_WASM_CLOCK
     if(init_wasm_clockenv() == ESP_OK) enable_wasm = true;
     #endif
-    #ifdef CONFIG_WASM_IMU6886
-    if(init_wasm_imu6886() == ESP_OK) enable_wasm = true;
+    #ifdef CONFIG_WASM_3DCUBE
+    if(init_wasm_3dcube() == ESP_OK) enable_wasm = true;
+    #endif
+    #ifdef CONFIG_WASM_3DCUBE_IMU6886
+    if(init_wasm_3dcube() == ESP_OK) enable_wasm = true;
     #endif
     #ifdef CONFIG_WASM_UNITGPS
     if(init_wasm_gpsgsv() == ESP_OK) enable_wasm = true;
@@ -113,13 +123,20 @@ void loop(void)
     if(enable_wasm) tick_wasm_clockenv();
     delay(500);
     #endif
-    #ifdef CONFIG_WASM_IMU6886
+    #ifdef CONFIG_WASM_3DCUBE
     if(enable_wasm) {
         // uint32_t time = millis();
-        tick_wasm_imu6886();
+        tick_wasm_3dcube();
         // ESP_LOGI(TAG, "time: %d", (uint32_t)(millis() - time));
         // When draw to LCD is suppressed. (calculations only)
         //     I (7264) main.cpp: time: 42
+    }
+    delay(1);
+    #endif
+    #ifdef CONFIG_WASM_3DCUBE_IMU6886
+    if(enable_wasm) {
+        tick_i2c_imu6886();
+        tick_wasm_3dcube_imu6866();
     }
     delay(1);
     #endif

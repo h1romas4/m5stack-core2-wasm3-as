@@ -4,8 +4,10 @@ menu "WebAssembly Apps"
             default WASM_CLOCK
         config WASM_CLOCK
             bool "Clock"
-        config WASM_IMU6886
-            bool "3D Cube Demo (not yet impliments AXIS IMU-6886)"
+        config WASM_3DCUBE
+            bool "3D Cube Demo"
+        config WASM_3DCUBE_IMU6886
+            bool "3D Cube Demo with IMU6866"
         config WASM_UNITGPS
             bool "UNIT GPS"
     endchoice

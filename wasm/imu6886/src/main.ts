@@ -24,7 +24,7 @@ const SCALE: f32 = 240;
 class Imu {
     private center_x: f32 = 0;
     private center_y: f32 = 0;
-    private angle: f32 = 0;
+    private tick_angle: f32 = 0;
     private prev_proj_2d_points: u32[][] = [];
 
     constructor(
@@ -42,8 +42,8 @@ class Imu {
         }
     }
 
-    tick(): void {
-        const angle: f32 = this.angle;
+    rotate(): void {
+        const angle: f32 = this.tick_angle;
 
         const cos: f32 = Mathf.cos(angle);
         const sin: f32 = Mathf.sin(angle);
@@ -64,6 +64,37 @@ class Imu {
             [    0,    0,     1]
         ];
 
+        this.draw(rot_x, rot_y, rot_z);
+
+        this.tick_angle += 0.04;
+    }
+
+    angle(roll: f32, pitch: f32, yaw: f32): void {
+        const angle: f32 = roll; // TODO:
+
+        const cos: f32 = Mathf.cos(angle);
+        const sin: f32 = Mathf.sin(angle);
+
+        const rot_x: f32[][] = [
+            [    1,    0,    0],
+            [    0,  cos, -sin],
+            [    0,  sin,  cos]
+        ];
+        const rot_y: f32[][] = [
+            [  cos,    0,  -sin],
+            [    0,    1,     0],
+            [  sin,    0,   cos]
+        ];
+        const rot_z: f32[][] = [
+            [  cos, -sin,     0],
+            [  sin,  cos,     0],
+            [    0,    0,     1]
+        ];
+
+        this.draw(rot_x, rot_y, rot_z);
+    }
+
+    draw(rot_x: f32[][], rot_y: f32[][], rot_z: f32[][]): void {
         let proj_2d_points: u32[][] = [];
         let rot_2d: f32[];
         for(let i = 0; i < CUBE_LENGTH; i++) {
@@ -83,9 +114,7 @@ class Imu {
             proj_2d_points[i] = [x, y];
         }
 
-        // Draw
         // c3dev.fill_rect(0, 0, this.width, this.height, c3dev.COLOR.BLACK);
-
         c3dev.start_write();
         // clear prev lines
         for(let i = 0; i < CUBE_LENGTH / 2; i++) {
@@ -107,8 +136,6 @@ class Imu {
             this.prev_proj_2d_points[i] = [x, y];
         }
         c3dev.end_write();
-
-        this.angle += 0.04;
     }
 
     connect(i: u32, j: u32, k: u32[][], color: c3dev.COLOR): void {
@@ -122,9 +149,15 @@ export function init(width: u32, height: u32): void {
     imu = new Imu(width, height);
 }
 
-export function tick(): void {
+export function rotate(): void {
     if(imu != null) {
-        imu!.tick();
+        imu!.rotate();
+    }
+}
+
+export function angle(roll: f32, pitch: f32, yaw: f32): void {
+    if(imu != null) {
+        imu!.angle(roll, pitch, yaw);
     }
 }
 

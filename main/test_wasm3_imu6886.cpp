@@ -9,6 +9,7 @@
 #include "m3_env.h"
 #include "m3_api_libc.h"
 
+#include "test_i2c_imu6866.h"
 #include "test_freetype.h"
 
 static const char *TAG = "test_wasm3_imu6886.cpp";
@@ -19,7 +20,8 @@ static const char *TAG = "test_wasm3_imu6886.cpp";
 IM3Environment wasm3_env;
 IM3Runtime wasm3_runtime;
 IM3Module wasm3_module;
-IM3Function wasm3_func_tick;
+IM3Function wasm3_func_rotate;
+IM3Function wasm3_func_angle;
 IM3Function wasm3_func_collect;
 
 #define WASM3_STACK_SIZE 16384
@@ -243,7 +245,12 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     }
 
     // Get tick function
-    result = m3_FindFunction(&wasm3_func_tick, wasm3_runtime, "tick");
+    result = m3_FindFunction(&wasm3_func_rotate, wasm3_runtime, "rotate");
+    if (result) {
+        ESP_LOGE(TAG, "m3_FindFunction: %s", result);
+        return ESP_FAIL;
+    }
+    result = m3_FindFunction(&wasm3_func_angle, wasm3_runtime, "angle");
     if (result) {
         ESP_LOGE(TAG, "m3_FindFunction: %s", result);
         return ESP_FAIL;
@@ -255,7 +262,7 @@ esp_err_t load_wasm(uint8_t *wasm_binary, size_t wasm_size)
     return ESP_OK;
 }
 
-esp_err_t init_wasm_imu6886(void)
+esp_err_t init_wasm_3dcube(void)
 {
     SPIFFS_WASM.begin(false, "/wasm", 4, "wasm");
 
@@ -287,11 +294,31 @@ esp_err_t init_wasm_imu6886(void)
     return load_wasm(wasm_binary, wasm_size);
 }
 
-esp_err_t tick_wasm_imu6886(void)
+esp_err_t tick_wasm_3dcube(void)
 {
     M3Result result = m3Err_none;
 
-    result = m3_Call(wasm3_func_tick, 0, nullptr);
+    result = m3_Call(wasm3_func_rotate, 0, nullptr);
+    if (result) {
+        ESP_LOGE(TAG, "m3_Call: %s", result);
+        return ESP_FAIL;
+    }
+
+    // GC by tick for AssemblyScript --runtime minimal
+    as_gc_collect();
+
+    return ESP_OK;
+}
+
+esp_err_t tick_wasm_3dcube_imu6866(void)
+{
+    M3Result result = m3Err_none;
+
+    imu6886_t imu6886;
+    get_i2c_imu6886(&imu6886);
+
+    float_t *argv0[4] = { &imu6886.roll, &imu6886.pitch, &imu6886.yaw };
+    result = m3_Call(wasm3_func_angle, 3, (const void**)argv0);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
