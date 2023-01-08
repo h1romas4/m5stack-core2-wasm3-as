@@ -13,3 +13,6 @@
 [submodule "components/lwgps/lwgps"]
 	path = components/lwgps/lwgps
 	url = https://github.com/MaJerle/lwgps
+[submodule "components/imu6866/MadgwickAHRS"]
+	path = components/imu6866/MadgwickAHRS
+	url = https://github.com/arduino-libraries/MadgwickAHRS
