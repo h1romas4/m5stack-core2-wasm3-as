@@ -135,9 +135,9 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # WebAssembly Apps
 #
-CONFIG_WASM_CLOCK=y
+# CONFIG_WASM_CLOCK is not set
 # CONFIG_WASM_3DCUBE is not set
-# CONFIG_WASM_3DCUBE_IMU6886 is not set
+CONFIG_WASM_3DCUBE_IMU6886=y
 # CONFIG_WASM_UNITGPS is not set
 # end of WebAssembly Apps
 
