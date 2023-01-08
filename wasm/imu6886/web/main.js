@@ -136,7 +136,7 @@ function decodeUTF8(wasmPtr) {
     await loadWasm();
     wasmExports.init(CANVAS_WIDTH, CANVAS_HEIGHT);
     setInterval(() => {
-        wasmExports.tick();
+        wasmExports.rotate();
         wasmExports.__collect() // clean up all garbage
     }, 16);
 })();
