@@ -31,6 +31,8 @@ font_render_t font_render;
  */
 boolean enable_wasm = false;
 
+// BT and Wifi will run out of IRAM if used at the same time.
+#ifndef CONFIG_WASM_3DCUBE_IMU6886
 void sync_wifi_ntp(void)
 {
     Preferences preferences;
@@ -64,6 +66,7 @@ void sync_wifi_ntp(void)
     // reboot..
     esp_restart();
 }
+#endif
 
 void setup(void)
 {
@@ -82,6 +85,8 @@ void setup(void)
     draw_freetype_string("Xtensa", 10, 10 + 50 * 4, M5.Lcd.color565(255, 0, 0), &font_render);
 
     // Test NVS and Wifi
+    // BT and Wifi will run out of IRAM if used at the same time.
+    #ifndef CONFIG_WASM_3DCUBE_IMU6886
     for(uint8_t i = 0; i < 200; i++) {
         M5.update();
         if(M5.BtnA.wasPressed() || M5.BtnB.wasPressed() || M5.BtnC.wasPressed()) {
@@ -90,6 +95,7 @@ void setup(void)
         }
         delay(10);
     }
+    #endif
 
     // Test Sensor
     #ifdef CONFIG_WASM_UNITGPS

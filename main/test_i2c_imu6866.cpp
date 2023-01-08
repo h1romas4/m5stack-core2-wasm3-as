@@ -1,5 +1,6 @@
 #include "M5Core2.h"
 #include "esp_log.h"
+#include "BluetoothSerial.h"
 
 #include "test_i2c_imu6866.h"
 
@@ -11,6 +12,8 @@ uint32_t microsPrevious;
 float_t roll;
 float_t pitch;
 float_t heading;
+
+BluetoothSerial SerialBT;
 
 static const char *TAG = "test_i2c_imu6866.cpp";
 
@@ -42,6 +45,15 @@ void init_i2c_imu6886(void)
     // initialize variables to pace updates to correct rate
     microsPerReading = 1000000 / SAMPLE_RATE;
     microsPrevious = micros();
+    // Bluetooth Serial
+    // $ sudo rfcomm -r -M -L 0 bind 0 XX:XX:XX:XX:XX:XX
+    // $ sudo rfcomm -a
+    // rfcomm0: XX:XX:XX:XX:XX:XX channel 1 clean
+    // $ sudo tail -f /dev/rfcomm0
+    // $ sudo rfcomm -a
+    // rfcomm0: XX:XX:XX:XX:XX:XX channel 1 connected [tty-attached]
+    // $ sudo rfcomm release 0
+    SerialBT.begin("IMU6886");
 }
 
 void tick_i2c_imu6886(void)
