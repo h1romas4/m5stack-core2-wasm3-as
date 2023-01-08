@@ -137,6 +137,7 @@ function decodeUTF8(wasmPtr) {
     wasmExports.init(CANVAS_WIDTH, CANVAS_HEIGHT);
     setInterval(() => {
         wasmExports.rotate();
+        // wasmExports.angle(0, 0, 0);
         wasmExports.__collect() // clean up all garbage
     }, 16);
 })();
