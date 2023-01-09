@@ -129,15 +129,35 @@ function decodeUTF8(wasmPtr) {
     return decoder.decode(utf8);
 }
 
+function clearCanvas() {
+    canvasContext.fillStyle = convertRGB565toStyle(0);
+    canvasContext.fillRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+}
+
 /**
  * Main
  */
 (async function() {
+    // Load Wasm
     await loadWasm();
+    // Init Wasm instance
     wasmExports.init(CANVAS_WIDTH, CANVAS_HEIGHT);
-    setInterval(() => {
+    // Auto rotate
+    const id = setInterval(() => {
+        clearCanvas(); // hack
         wasmExports.rotate();
-        // wasmExports.angle(0, 0, 0);
-        wasmExports.__collect() // clean up all garbage
+        wasmExports.__collect(); // clean up all garbage
     }, 16);
+    // Recive sensor value from serial-websocket
+    const ws = new WebSocket('ws://localhost:18080');
+    ws.addEventListener('open', () => {
+        clearInterval(id);
+    });
+    ws.addEventListener('message', (event) => {
+        const value = event.data.split(",").map((value) => parseFloat(value));
+        // console.log(value);
+        clearCanvas(); // hack
+        wasmExports.angle(value[0], value[1], value[2]);
+        wasmExports.__collect(); // clean up all garbage
+    });
 })();

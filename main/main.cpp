@@ -1,16 +1,16 @@
 #include "M5Core2.h"
-#include "Preferences.h"
-#include "WiFi.h"
 
 #include "test_freetype.h"
 
 #ifdef CONFIG_WASM_CLOCK
+#include "test_nvs_wifi.h"
 #include "test_wasm3_clockenv.h"
 #endif
 #ifdef CONFIG_WASM_3DCUBE
 #include "test_wasm3_imu6886.h"
 #endif
 #ifdef CONFIG_WASM_3DCUBE_IMU6886
+#include "test_bluetooth_serial.h"
 #include "test_i2c_imu6866.h"
 #include "test_wasm3_imu6886.h"
 #endif
@@ -31,40 +31,6 @@ font_render_t font_render;
  */
 boolean enable_wasm = false;
 
-void sync_wifi_ntp(void)
-{
-    Preferences preferences;
-
-    if(!preferences.begin("wifi", true)) return;
-
-    String ssid = preferences.getString("ssid");
-    String passwd = preferences.getString("passwd");
-
-    ESP_LOGI(TAG, "Connect to %s", ssid.c_str());
-    WiFi.begin(ssid.c_str(), passwd.c_str());
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(200);
-    }
-    ESP_LOGI(TAG, "Connected!");
-    // Sync NTP
-    configTime(9 * 3600L, 0, "ntp1.jst.mfeed.ad.jp", "ntp2.jst.mfeed.ad.jp", "ntp3.jst.mfeed.ad.jp");
-    // Wait Time Sync
-    struct tm timeInfo;
-    while(true) {
-        getLocalTime(&timeInfo);
-        if(timeInfo.tm_year > 0) {
-            break;
-        }
-        delay(500);
-    }
-    ESP_LOGI(TAG, "Configured time from NTP");
-    WiFi.disconnect();
-    // not enough memory..
-    ESP_LOGI(TAG, "Restart ESP32...");
-    // reboot..
-    esp_restart();
-}
-
 void setup(void)
 {
     M5.begin();
@@ -82,6 +48,8 @@ void setup(void)
     draw_freetype_string("Xtensa", 10, 10 + 50 * 4, M5.Lcd.color565(255, 0, 0), &font_render);
 
     // Test NVS and Wifi
+    // BT and Wifi will run out of IRAM if used at the same time.
+    #ifdef CONFIG_WASM_CLOCK
     for(uint8_t i = 0; i < 200; i++) {
         M5.update();
         if(M5.BtnA.wasPressed() || M5.BtnB.wasPressed() || M5.BtnC.wasPressed()) {
@@ -90,12 +58,14 @@ void setup(void)
         }
         delay(10);
     }
+    #endif
 
     // Test Sensor
     #ifdef CONFIG_WASM_UNITGPS
     init_uart_unitgps();
     #endif
     #ifdef CONFIG_WASM_3DCUBE_IMU6886
+    init_bluetooth_serial();
     init_i2c_imu6886();
     #endif
 

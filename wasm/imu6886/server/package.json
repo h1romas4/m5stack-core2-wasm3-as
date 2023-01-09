@@ -1,0 +1,21 @@
+{
+  "name": "serial-websocker",
+  "version": "1.0.0",
+  "description": "serial-websocker",
+  "devDependencies": {
+    "@babel/core": "^7.18.10",
+    "@babel/eslint-parser": "^7.18.9",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@babel/preset-env": "^7.18.10"
+  },
+  "dependencies": {
+    "serialport": "^10.5.0",
+    "websocket": "^1.0.34",
+    "dotenv": "^16.0.3"
+  },
+  "scripts": {
+    "start": "node src/serial-websocket.js"
+  },
+  "author": "h1romas4",
+  "license": "MIT"
+}

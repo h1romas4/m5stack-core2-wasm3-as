@@ -9,6 +9,7 @@
 #include "m3_env.h"
 #include "m3_api_libc.h"
 
+#include "test_bluetooth_serial.h"
 #include "test_i2c_imu6866.h"
 #include "test_freetype.h"
 
@@ -317,12 +318,18 @@ esp_err_t tick_wasm_3dcube_imu6866(void)
     imu6886_t imu6886;
     get_i2c_imu6886(&imu6886);
 
+    // send to Wasm
     float_t *argv0[4] = { &imu6886.roll, &imu6886.pitch, &imu6886.yaw };
     result = m3_Call(wasm3_func_angle, 3, (const void**)argv0);
     if (result) {
         ESP_LOGE(TAG, "m3_Call: %s", result);
         return ESP_FAIL;
     }
+
+    // send to Serial
+    char str[255]; // TODO
+    sprintf(str, "%f,%f,%f\n", imu6886.roll, imu6886.pitch, imu6886.yaw);
+    printf_bluetooth_serial(str);
 
     // GC by tick for AssemblyScript --runtime minimal
     as_gc_collect();

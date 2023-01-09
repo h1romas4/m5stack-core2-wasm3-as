@@ -1,5 +1,6 @@
 #include "M5Core2.h"
 #include "esp_log.h"
+#include "BluetoothSerial.h"
 
 #include "test_i2c_imu6866.h"
 
