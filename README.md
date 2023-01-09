@@ -101,7 +101,7 @@ idf.py menuconfig
 idf.py build flash monitor
 ```
 
-![Wasm2](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-04.jpg)
+![Wasm2](https://raw.githubusercontent.com/h1romas4/m5stack-core2-wasm3-as/main/docs/images/m5stack-core2-05.jpg)
 
 ### Setup WiFi (Optional)
 
