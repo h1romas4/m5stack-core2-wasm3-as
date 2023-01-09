@@ -10,6 +10,7 @@
 #include "test_wasm3_imu6886.h"
 #endif
 #ifdef CONFIG_WASM_3DCUBE_IMU6886
+#include "test_bluetooth_serial.h"
 #include "test_i2c_imu6866.h"
 #include "test_wasm3_imu6886.h"
 #endif
@@ -64,6 +65,7 @@ void setup(void)
     init_uart_unitgps();
     #endif
     #ifdef CONFIG_WASM_3DCUBE_IMU6886
+    init_bluetooth_serial();
     init_i2c_imu6886();
     #endif
 
