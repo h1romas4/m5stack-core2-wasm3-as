@@ -7,7 +7,7 @@ menu "WebAssembly Apps"
         config WASM_3DCUBE
             bool "3D Cube Demo"
         config WASM_3DCUBE_IMU6886
-            bool "3D Cube Demo with IMU6866"
+            bool "3D Cube Demo with IMU6886"
         config WASM_UNITGPS
             bool "UNIT GPS"
     endchoice
