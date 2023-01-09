@@ -4,6 +4,7 @@ set(INCLUDEDIRS
 
 set(SRCS
     main.cpp
+    test_nvs_wifi.cpp
     test_uart_unitgps.cpp
     test_i2c_imu6866.cpp
     test_wasm3_clockenv.cpp
