@@ -7,31 +7,29 @@ const WEBSOCKET_PORT = process.env.WEBSOCKET_PORT;
 const SERIAL_PORT = process.env.SERIAL_PORT;
 const SERIAL_BAUDRATE = parseInt(process.env.SERIAL_BAUDRATE);
 
-const webSocketServer = require('websocket').server;
 const http = require('http');
-const SerialPort = require("serialport").SerialPort
+const socket = require('websocket').server;
+const serial = require("serialport").SerialPort
 
 /**
  * WebSocket
  */
 const server = http.createServer(function (request, response) {});
-let clients = [];
-
+const wsServer = new socket({ httpServer: server });
 server.listen(WEBSOCKET_PORT, function () {
-    console.log('Server is listening on port ' + WEBSOCKET_PORT);
+    console.log(`Server is listening on port ${WEBSOCKET_PORT}`);
 });
 
-const wsServer = new webSocketServer({ httpServer: server });
-
+let clients = [];
 wsServer.on('request', function (request) {
-    console.log('Connection from origin ' + request.origin + '.');
+    console.log(`Connection from origin ${request.origin}.`);
     let connection = request.accept(null, request.origin);
     console.log('Connection accepted.');
 
     let index = clients.push(connection) - 1;
 
     connection.on('close', function (connection) {
-        console.log("Peer " + connection.remoteAddress + " disconnected.");
+        console.log(`Peer ${connection.remoteAddress} disconnected.`);
         clients.splice(index, 1);
     });
 });
@@ -41,13 +39,13 @@ wsServer.on('request', function (request) {
  */
 let buffer = "";
 
-const serialPort = new SerialPort({
+const serialPort = new serial({
     path: SERIAL_PORT,
     baudRate: SERIAL_BAUDRATE,
 });
 
 function onSerial(msg) {
-    console.log("uart msg:" + msg);
+    console.log(`serial:${msg}`);
     for (let i = 0; i < clients.length; i++) {
         clients[i].sendUTF(msg);
     }
