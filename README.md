@@ -76,7 +76,7 @@ idf.py partition-table-flash
 parttool.py write_partition --partition-name=font --partition-subtype=spiffs --input resources/spiffs_font.bin
 ```
 
-4. Write WebAssembly(.wasm) to SPIFFS ([AssemblyScript Analog Clock](https://h1romas4.github.io/m5stamp-c3dev/asclock/))
+4. Write WebAssembly(.wasm) to SPIFFS ([WebAssembly Apps](https://github.com/h1romas4/m5stack-core2-wasm3-as/tree/main/wasm))
 
 ```
 parttool.py write_partition --partition-name=wasm --partition-subtype=spiffs --input resources/spiffs_wasm.bin
