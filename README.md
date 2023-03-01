@@ -23,7 +23,7 @@ See also: RISC-V version
 
 ### Require
 
-- [Setup ESF-IDF v4.4.3](https://docs.espressif.com/projects/esp-idf/en/v4.4.3/esp32/get-started/index.html#installation-step-by-step)
+- [Setup ESF-IDF v4.4.4](https://docs.espressif.com/projects/esp-idf/en/v4.4.4/esp32/get-started/index.html#installation-step-by-step)
 
 get_idf
 
@@ -178,8 +178,8 @@ Thanks for all the open source.
 
 |Name|Version|License|
 |-|-|--|
-|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4.3`|BSD License|
-|[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.6`|LGPL-2.1 License|
+|[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4.4`|BSD License|
+|[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.7`|LGPL-2.1 License|
 |[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.5`|MIT License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.4`|FreeType Part(The FreeType License)|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
