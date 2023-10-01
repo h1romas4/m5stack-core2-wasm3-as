@@ -117,13 +117,13 @@ ssid,data,string,[ssid]
 passwd,data,string,[password]
 ```
 
-2. Create NVS Partation file
+2. Create NVS Partition file
 
 ```
 python ${IDF_PATH}/components/nvs_flash/nvs_partition_generator/nvs_partition_gen.py generate nvs_partition.csv nvs_partition.bin 0x6000
 ```
 
-3. Write NVS Partation
+3. Write NVS Partition
 
 ```
 esptool.py write_flash 0x9000 nvs_partition.bin
