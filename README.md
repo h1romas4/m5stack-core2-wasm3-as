@@ -180,7 +180,7 @@ Thanks for all the open source.
 |-|-|--|
 |[esp-idf](https://docs.espressif.com/projects/esp-idf/en/release-v4.4/esp32/get-started/index.html)|`v4.4.6`|BSD License|
 |[arduino-esp32](https://github.com/espressif/arduino-esp32)|`2.0.14`|LGPL-2.1 License|
-|[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.6`|MIT License|
+|[M5Core2](https://github.com/m5stack/M5Core2)|`0.1.8`|MIT License|
 |[M5EPD](https://github.com/m5stack/M5EPD)|`0.1.5`|MIT License|
 |[lwgps](https://github.com/MaJerle/lwgps)|`v2.1.0`|MIT License|
 |[Wasm3](https://github.com/wasm3/wasm3)|master(`045040a9`)|MIT License|

@@ -14,12 +14,14 @@ set(INCLUDEDIRS
 )
 
 set(SRCS
+    M5Core2/src/INA3221.cpp
     M5Core2/src/Fonts/Font32rle.c
     M5Core2/src/Fonts/Font64rle.c
     M5Core2/src/Fonts/Font7srle.c
     M5Core2/src/Fonts/Font16.c
     M5Core2/src/Fonts/Font72rle.c
     M5Core2/src/Fonts/glcdfont.c
+    M5Core2/src/AXP.cpp
     M5Core2/src/M5Display.cpp
     M5Core2/src/M5Core2.cpp
     M5Core2/src/utility/quaternionFilters.cpp
@@ -34,9 +36,10 @@ set(SRCS
     M5Core2/src/utility/PointAndZone.cpp
     M5Core2/src/utility/MPU6886.cpp
     M5Core2/src/RTC.cpp
+    M5Core2/src/Speaker.cpp
+    M5Core2/src/AXP2101.cpp
     M5Core2/src/M5Touch.cpp
     M5Core2/src/AXP192.cpp
-    M5Core2/src/Speaker.cpp
     # FreeType
     M5EPD/src/font_render.c
     M5EPD/src/ffsupport.cpp
@@ -125,4 +128,9 @@ set_source_files_properties(M5Core2/src/utility/In_eSPI.cpp
 set_source_files_properties(M5Core2/src/utility/Sprite.cpp
     PROPERTIES COMPILE_FLAGS
     -Wno-error=comment
+)
+
+set_source_files_properties(M5Core2/src/INA3221.cpp
+    PROPERTIES
+    COMPILE_FLAGS "-Wno-error=switch -Wno-error=maybe-uninitialized"
 )
